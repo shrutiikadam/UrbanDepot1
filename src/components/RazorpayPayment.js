@@ -13,9 +13,9 @@ const RazorpayPayment = () => {
         alert(`Payment ID: ${response.razorpay_payment_id}`);
       },
       "prefill": {
-        "name": "Shruti Kadam",
-        "email": "shruti.kadam@example.com",
-        "contact": "9321530038"
+        "name": "Durva Kadam",
+        "email": "durvakadam@example.com",
+        "contact": "8828174914"
       },
       "theme": {
         "color": "#F37254"
