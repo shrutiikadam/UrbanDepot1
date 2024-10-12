@@ -41,10 +41,11 @@ const Ticket = () => {
       </div>
      
       {/* Buttons */}
-      <div className="ticket-actions">
-        <button className="cancel-button">Cancel Booking</button>
-        <button className="support-button">Contact Support</button>
+      <div class="ticket-actions">
+        <button class="cancel-button">Cancel Booking</button>
+        <button class="support-button">Contact Support</button>
       </div>
+
     </div>
   );
 };

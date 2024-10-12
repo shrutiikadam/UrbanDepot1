@@ -1,47 +1,70 @@
-/* nav {
+/* Navbar styles */
+nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ea3434; 
-    color: white;
-    padding: 15px 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    justify-content: space-between; /* Align items with space between */
+    align-items: center;            /* Center items vertically */
+    background-color: #5085d3;     /* Navbar background color */
+    padding: 15px 30px;            /* Padding for the navbar */
+    color: white;                   /* Text color */
+    font-family: 'Roboto', sans-serif; /* Font family */
 }
 
 nav h1 {
-    font-size: 24px;
-    margin: 0;
+    margin: 0;                     /* Remove default margin */
+    font-size: 24px;               /* Font size for the title */
 }
 
 .nav-links {
-    display: flex;
-    gap: 20px;
+    display: flex;                  /* Flex layout for links */
+    gap: 15px;                      /* Space between links */
+}
 
 .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    color: white;                  /* Link color */
+    text-decoration: none;         /* Remove underline */
+    font-size: 16px;              /* Font size for links */
+    transition: color 0.3s;       /* Transition effect for hover */
 }
 
 .nav-links a:hover {
-    color: #FFD700; 
+    color: #FFD700;                /* Change color on hover */
 }
 
+.user-info {
+    display: flex;                  /* Flex layout for user info */
+    align-items: center;            /* Center items vertically */
+}
+
+.user-info span {
+    margin-right: 15px;             /* Space between email and logout */
+    font-size: 16px;               /* Font size for user email */
+}
+
+button {
+    padding: 10px 20px;            /* Button padding */
+    border: none;                   /* No border */
+    border-radius: 5px;            /* Rounded corners */
+    background-color: #dc3545;     /* Logout button color */
+    color: white;                   /* Button text color */
+    cursor: pointer;                /* Pointer cursor on hover */
+    font-size: 16px;               /* Font size for button */
+    transition: background-color 0.3s; /* Transition effect for hover */
+}
+
+button:hover {
+    background-color: #c82333;      /* Darker red on hover */
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
     nav {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column;      /* Stack items vertically */
+        align-items: flex-start;      /* Align items to the left */
     }
 
     .nav-links {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%; 
+        flex-direction: column;      /* Stack links vertically */
+        gap: 10px;                   /* Smaller space between links */
+        margin-top: 10px;            /* Margin above links */
     }
-
-    .nav-links a {
-        width: 100%; 
-        text-align: center;
-    }
-} */
+}
