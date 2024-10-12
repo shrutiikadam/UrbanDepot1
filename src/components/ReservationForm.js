@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './ReservationForm.css';
 
+// Function to generate time options for the select dropdown
 const generateTimeOptions = () => {
   const options = [];
   const startTime = 0;
@@ -15,6 +16,7 @@ const generateTimeOptions = () => {
   return options;
 };
 
+// Function to get the current local date in YYYY-MM-DD format
 const getCurrentLocalDate = () => {
   const today = new Date();
   const year = today.getFullYear();
@@ -23,8 +25,19 @@ const getCurrentLocalDate = () => {
   return `${year}-${month}-${day}`;
 };
 
+// Country codes list
+const countryCodes = [
+  { code: '+1', name: 'United States' },
+  { code: '+91', name: 'India' },
+  { code: '+44', name: 'United Kingdom' },
+  { code: '+61', name: 'Australia' },
+  { code: '+81', name: 'Japan' },
+  // Add more country codes as needed
+];
+
 const ReservationForm = ({ userEmail }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { address = '', place = '' } = location.state || {};
 
   const [formData, setFormData] = useState({
@@ -39,6 +52,8 @@ const ReservationForm = ({ userEmail }) => {
     email: userEmail || '',
     address: address,
     place: place,
+    contactNumber: '', // Add contact number to the state
+    countryCode: '+1', // Default country code
     termsAccepted: false,
   });
 
@@ -53,6 +68,27 @@ const ReservationForm = ({ userEmail }) => {
     }));
   }, [userEmail, address, place]);
 
+  // Update checkout date based on checkin date change
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+      // Reset checkout date if checkin date changes
+      ...(name === 'checkinDate' && { checkoutDate: value }),
+    }));
+  };
+
+  // Update checkout time based on checkin time
+  const handleTimeChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+      ...(name === 'checkinTime' && { checkoutTime: '' }), // Reset checkout time if checkin time changes
+    }));
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -63,14 +99,30 @@ const ReservationForm = ({ userEmail }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validate contact number to ensure it's 10 digits long (excluding country code)
+    const cleanContactNumber = formData.contactNumber.replace(/\D/g, ''); // Remove non-digit characters
+    if (cleanContactNumber.length !== 10) {
+      alert('Please enter a valid 10-digit contact number.');
+      return;
+    }
+    
     const reservationData = {
       ...formData,
       total_amount: "50000", // Example amount in paise
+      checkinDate: formData.checkinDate,
+      checkoutDate: formData.checkoutDate,
+      checkinTime: formData.checkinTime,
+      checkoutTime: formData.checkoutTime,
     };
+    
+    // Log reservation data
     console.log(reservationData);
-  };
 
-  // ... other code remains the same
+    // Navigate to the payment page
+    navigate('/payment', { state: { reservationData } });
+};
+
 
   return (
     <div className="container">
@@ -96,6 +148,33 @@ const ReservationForm = ({ userEmail }) => {
             onChange={handleChange}
             required
           />
+        </div>
+
+        <div className="form-group">
+          <label>Contact Number:</label>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <select
+              name="countryCode"
+              value={formData.countryCode}
+              onChange={handleChange}
+              style={{ marginRight: '1rem', width: '100px' }}
+            >
+              {countryCodes.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.code} {country.name}
+                </option>
+              ))}
+            </select>
+            <input
+              type="tel" // Use 'tel' input type for better mobile keyboard experience
+              name="contactNumber"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              placeholder="Enter your contact number"
+              required
+              pattern="\d{10}" // Pattern to ensure 10 digits
+            />
+          </div>
         </div>
 
         {/* Use flexbox for address and place */}
@@ -133,7 +212,7 @@ const ReservationForm = ({ userEmail }) => {
               type="date"
               name="checkinDate"
               value={formData.checkinDate}
-              onChange={handleChange}
+              onChange={handleDateChange}
               required
             />
           </div>
@@ -145,7 +224,7 @@ const ReservationForm = ({ userEmail }) => {
               name="checkoutDate"
               value={formData.checkoutDate}
               min={formData.checkinDate}
-              onChange={handleChange}
+              onChange={handleDateChange}
               required
             />
           </div>
@@ -157,7 +236,7 @@ const ReservationForm = ({ userEmail }) => {
           <select
             name="checkinTime"
             value={formData.checkinTime}
-            onChange={handleChange}
+            onChange={handleTimeChange}
             required
           >
             <option value="">Select Check-In Time</option>
@@ -174,15 +253,24 @@ const ReservationForm = ({ userEmail }) => {
           <select
             name="checkoutTime"
             value={formData.checkoutTime}
-            onChange={handleChange}
+            onChange={handleTimeChange}
             required
           >
             <option value="">Select Check-Out Time</option>
-            {timeOptions.map((time) => (
-              <option key={time} value={time}>
-                {time}
-              </option>
-            ))}
+            {timeOptions
+              .filter((time) => {
+                if (!formData.checkinTime) return true;
+                const checkinHour = parseInt(formData.checkinTime.split(':')[0]);
+                const checkinMinute = parseInt(formData.checkinTime.split(':')[1]);
+                const checkinTimeInMinutes = checkinHour * 60 + checkinMinute;
+                const checkoutTimeInMinutes = parseInt(time.split(':')[0]) * 60 + parseInt(time.split(':')[1]);
+                return checkoutTimeInMinutes > checkinTimeInMinutes;
+              })
+              .map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
           </select>
         </div>
 
@@ -214,21 +302,6 @@ const ReservationForm = ({ userEmail }) => {
         </div>
 
         <div className="form-group">
-          <label>Payment Method:</label>
-          <select
-            name="paymentMethod"
-            value={formData.paymentMethod}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Payment Method</option>
-            <option value="credit">Credit Card</option>
-            <option value="debit">Debit Card</option>
-            <option value="digital">Digital Wallet</option>
-          </select>
-        </div>
-
-        <div className="form-group">
           <label>
             <input
               type="checkbox"
@@ -250,7 +323,6 @@ const ReservationForm = ({ userEmail }) => {
       </form>
     </div>
   );
-
 };
 
 export default ReservationForm;
