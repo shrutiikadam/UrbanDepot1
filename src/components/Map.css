@@ -35,18 +35,22 @@
     color: #666;
     margin-bottom: 15px;
 }
-
 .popup button {
-    display: inline-block;
+    display: flex; /* Keep display flex for centering content */
     background-color: #4CAF50;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px;
+    margin: 10px 0; /* Increase vertical space between buttons */
     transition: background-color 0.3s ease;
+    height: 40px;
+    width: 100%; /* Make buttons full width of the popup */
+    align-items: center;
+    justify-content: center; /* Center text within the button */
 }
+
 
 .popup button:hover {
     background-color: #45a049;
@@ -57,7 +61,7 @@
 }
 
 .popup button:last-child:hover {
-    background-color: #e53935;
+    background-color: #e7130f;
 }
 
 /* Search Bar and Controls */
@@ -99,47 +103,72 @@ select:focus {
     background-color: #f1f1f1;
 }
 
-/* Directions Panel */
 #directions-panel {
     padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Soft white for better appearance */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Depth effect */
+    font-family: 'Arial', sans-serif;
     margin-top: 20px;
-    max-width: 400px;
-    line-height: 1.6;
+    width: 100%; /* Max width for desktop */
+    line-height: 1.6; /* Improved line height for readability */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for directions panel */
+#directions-panel:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
 }
 
 #directions-panel h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 22px; /* Increased font size for better visibility */
+    color: #4CAF50; /* Green color for the heading */
+    margin-bottom: 15px; /* Spacing below the heading */
+    border-bottom: 2px solid #4CAF50; /* Underline effect for the title */
+    padding-bottom: 5px; /* Padding for spacing from the text */
 }
 
 #directions-panel p {
-    font-size: 14px;
-    color: #666;
+    font-size: 16px; /* Larger font size for better readability */
+    color: #333; /* Dark color for better contrast */
+    margin-bottom: 15px; /* Consistent spacing below paragraphs */
 }
 
-/* Hidden Inputs (Optional Styling) */
-#place-lat, #place-lng {
-    display: none;
+/* Aligning items within the panel */
+#directions-panel .direction-item {
+    margin-bottom: 10px; /* Space between direction items */
+    padding: 10px; /* Padding for items */
+    border: 1px solid #ddd; /* Light border for separation */
+    border-radius: 5px; /* Rounded corners for items */
+    transition: background-color 0.3s ease; /* Transition effect for hover */
+}
+
+/* Hover effect for direction items */
+#directions-panel .direction-item:hover {
+    background-color: #f0f8e9; /* Light green background on hover */
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .popup {
-        width: 200px;
-        padding: 15px;
+        width: 90%; /* Responsive width for mobile */
+        padding: 15px; /* Maintain padding */
     }
 
     #pac-input {
-        width: 100%;
+        width: 100%; /* Full width for input */
     }
 
     #directions-panel {
-        max-width: 100%;
-        padding: 15px;
+        max-width: 100%; /* Full width on mobile */
+        padding: 15px; /* Maintain padding */
+    }
+
+    #directions-panel h3 {
+        font-size: 20px; /* Adjust heading size for mobile */
+    }
+
+    #directions-panel p {
+        font-size: 14px; /* Adjust paragraph size for mobile */
     }
 }
