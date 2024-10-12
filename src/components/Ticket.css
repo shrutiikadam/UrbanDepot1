@@ -2,7 +2,7 @@
 .ticket-container {
     background: #83c0d6; /* Background color of the container */
     width: 350px;        /* Width of the container */
-    height: 680px;       /* Height of the container */
+    height: 790px;       /* Height of the container */
     margin: 40px auto;   /* Centering the container */
     overflow: hidden;     /* Hides overflow */
     font-family: 'Roboto', sans-serif; /* Font family */
@@ -140,3 +140,22 @@
     border-top: 3px dashed #3e3939; /* Dashed border color and thickness */
     margin: 10px 0;                 /* Margin above and below the border */
 }
+.directions-section {
+    margin-top: 20px;
+  }
+  
+  .send-directions-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    text-align: center;
+    text-decoration: none; /* No underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s;
+  }
+  
+  .send-directions-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  

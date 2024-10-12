@@ -15,6 +15,8 @@ import Ticket from './components/Ticket';
 
 const App = () => {
   const [userEmail, setUserEmail] = useState("");
+  const [address, setAddress] = useState(""); // State for address
+  const [place, setPlace] = useState(""); // State for place
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -33,11 +35,11 @@ const App = () => {
       <div>
         <Navbar userEmail={userEmail} />
         <Routes>
-          <Route path="/" element={<Map />} />
+          <Route path="/" element={<Map setAddress={setAddress} setPlace={setPlace} />} /> {/* Pass setter functions */}
           <Route path="/payment" element={<RazorpayPayment />} />
           <Route path="/register-place" element={<RegisterPlace />} />
-          <Route path="/reservation" element={<ReservationForm userEmail={userEmail} />} />
-          <Route path="/signup" element={<SignUp onEmailChange={setUserEmail} />} /> {/* Pass setUserEmail */}
+          <Route path="/reservation" element={<ReservationForm userEmail={userEmail} address={address} place={place} />} />
+          <Route path="/signup" element={<SignUp onEmailChange={setUserEmail} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/demo" element={<FetchLatLng />} />
           <Route path="/ticket" element={<Ticket />} />

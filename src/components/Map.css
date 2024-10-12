@@ -1,0 +1,145 @@
+/* Map Container Styling */
+.map {
+    height: 100%;  /* Set the height to 50px */
+    width: 100%;   /* Set the width to 50px */
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Popup Styling */
+.popup {
+    margin-top: 200px;;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 10;
+    width: 250px;
+    font-family: Arial, sans-serif;
+}
+
+.popup h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.popup p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.popup button {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #45a049;
+}
+
+.popup button:last-child {
+    background-color: #f44336;
+}
+
+.popup button:last-child:hover {
+    background-color: #e53935;
+}
+
+/* Search Bar and Controls */
+#pac-input {
+    padding: 10px;
+    margin: 10px 10px 20px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ae8;
+}
+
+/* Travel Mode Dropdown */
+select {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+select:focus {
+    background-color: #f1f1f1;
+}
+
+/* Directions Panel */
+#directions-panel {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+#directions-panel h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#directions-panel p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Hidden Inputs (Optional Styling) */
+#place-lat, #place-lng {
+    display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .popup {
+        width: 200px;
+        padding: 15px;
+    }
+
+    #pac-input {
+        width: 100%;
+    }
+
+    #directions-panel {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
