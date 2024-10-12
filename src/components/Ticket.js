@@ -1,53 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
-import './Ticket.css'; // For styling
+import { doc, getDoc } from 'firebase/firestore';
+import db from '../firebaseConfig'; // Import your Firebase config
+import './Ticket.css'; // Import styling
 
 const Ticket = () => {
-  // Dummy ticket details
-  const ticketDetails = {
-    title: 'Dilwale Dulhania Le Jayenge',
-    location: 'Maratha Mandir, Mumbai Central',
-    time: 'Tue, 01 Nov | 11:30 AM',
-    screen: 'Screen 1',
-    seat: 'F7',
-    amount: 354.54,
-    bookingId: 'WHL6CTF',
-    imageUrl: 'https://via.placeholder.com/150', // Placeholder for movie poster
+  const [ticketDetails, setTicketDetails] = useState(null); // State to store ticket details
+  const [loading, setLoading] = useState(true); // Manage loading state
+
+  // Function to fetch ticket details from Firestore
+  const fetchTicketDetails = async () => {
+    try {
+      const ticketDocRef = doc(db, 'places', '1Fg9Wdy0Lk1Te6EfKnpY'); // Use your document ID
+      const ticketDoc = await getDoc(ticketDocRef);
+
+      if (ticketDoc.exists()) {
+        setTicketDetails(ticketDoc.data()); // Store the fetched data in state
+      } else {
+        console.log('No such document!');
+      }
+    } catch (error) {
+      console.error('Error fetching ticket:', error);
+    } finally {
+      setLoading(false); // Stop loading after fetch
+    }
   };
+
+  useEffect(() => {
+    fetchTicketDetails(); // Fetch data when the component mounts
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Loading indicator
+  }
+
+  if (!ticketDetails) {
+    return <div>No ticket details available</div>; // Show if no data is found
+  }
 
   return (
     <div className="ticket-container">
-      {/* Header with movie or parking spot details */}
       <div className="ticket-header">
-        <img src={ticketDetails.imageUrl} alt="Movie Poster" className="poster" />
-        <div className="details">
-          <h2>{ticketDetails.title}</h2>
-          <p>{ticketDetails.location}</p>
-          <p>{ticketDetails.time}</p>
+        <div className="logo-section">
+          <img src="/images/logo.png" alt="UrbanDepot Logo" className="urbandepot-logo" />
+        </div>
+        <div className="header-details">
+          <h2>Location: {ticketDetails.address}</h2>
+          <p><strong>Parking Number:</strong> {ticketDetails.parking_number}</p>
         </div>
       </div>
-      <div class="dashed-border"></div> 
-      {/* QR Code */}
-      <div className="qr-code-section">
-        <QRCode value={ticketDetails.bookingId} size={128} />
-        <p>Booking ID: {ticketDetails.bookingId}</p>
-      </div>
-
-      {/* Ticket Details */}
+  
       <div className="ticket-info">
-        <p><strong>Screen: </strong>{ticketDetails.screen}</p>
-        <p><strong>Seat: </strong>{ticketDetails.seat}</p>
-        <p><strong>Total Amount: </strong>₹{ticketDetails.amount}</p>
+        <p><strong>Availability:</strong> {ticketDetails.availability.from} - {ticketDetails.availability.to}</p>
+        <p><strong>Charge:</strong> ₹{ticketDetails.charge}</p>
       </div>
-     
-      {/* Buttons */}
-      <div class="ticket-actions">
-        <button class="cancel-button">Cancel Booking</button>
-        <button class="support-button">Contact Support</button>
+  
+      <div className="landmark-info">
+        <p><strong>Latitude:</strong> {ticketDetails.landmark.lat}</p>
+        <p><strong>Longitude:</strong> {ticketDetails.landmark.lng}</p>
       </div>
-
+  
+      <div className="qr-code-section">
+        <QRCode value={`Parking Number: ${ticketDetails.parking_number}`} size={128} />
+        <p>Scan the QR Code for your booking details.</p>
+      </div>
+  
+      <div className="ticket-actions">
+        <button className="cancel-button">Cancel Booking</button>
+        <button className="support-button">Contact Support</button>
+      </div>
     </div>
   );
+  
 };
 
 export default Ticket;

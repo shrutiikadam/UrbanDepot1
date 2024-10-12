@@ -29,7 +29,7 @@
 /* Inner ticket styling */
 .ticket {
     background: #ffffff; /* Background color for the inner ticket */
-    width: 70px;; /* Reduce width to prevent overflow */
+    width: 70px; /* Reduce width to prevent overflow */
     height: 500px; /* Reduce height to prevent overflow */
     padding: 10px;       /* Padding for the inner ticket */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
@@ -39,7 +39,7 @@
     left: 20px;           /* Offset from the left */
 }
 
-/* Header section with poster and movie details */
+/* Header section with logo and ticket details */
 .ticket-header {
     display: flex;
     align-items: center;
@@ -52,28 +52,18 @@
     border-top-right-radius: 25px;
 }
 
-.poster {
-    width: 100px;        /* Width of the poster */
-    height: 150px;       /* Height of the poster */
-    object-fit: cover;   /* Cover the poster without distortion */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    margin-right: 20px;  /* Space between poster and details */
+/* Logo styling */
+.logo-section {
+    display: flex;        /* Use flex for alignment */
+    justify-content: center; /* Center logo horizontally */
+    margin-bottom: 10px; /* Space below the logo */
 }
 
-.details {
-    flex: 1;             /* Allow details to grow */
-}
-
-.details h2 {
-    font-size: 20px;     /* Font size for title */
-    margin: 0 0 10px;   /* Margin for title */
-    font-weight: bold;   /* Bold font weight for title */
-}
-
-.details p {
-    font-size: 14px;     /* Font size for details */
-    margin: 5px 0;       /* Margin for details */
+.urbandepot-logo {
+    width: 100px;        /* Set a fixed width for the logo */
+    height: auto;        /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the logo fits without distortion */
+    border-radius: 10px; /* Optional: Add rounded corners */
 }
 
 /* QR code section */
@@ -145,6 +135,7 @@
 .support-button:hover {
     background-color: #00bfa5; /* Darker green on hover */
 }
+
 .dashed-border {
     border-top: 3px dashed #3e3939; /* Dashed border color and thickness */
     margin: 10px 0;                 /* Margin above and below the border */
