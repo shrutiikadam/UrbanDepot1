@@ -11,6 +11,7 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import SendEmail from './components/SendEmail';
 import FetchLatLng from './components/FetchLatLng';
+import Ticket from './components/Ticket';
 
 const App = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/demo" element={<FetchLatLng />} />
+          <Route path="/ticket" element={<Ticket />} />
         </Routes>
       </div>
     </Router>

@@ -1,0 +1,151 @@
+/* General container for the ticket with zigzag border */
+.ticket-container {
+    background: #83c0d6; /* Background color of the container */
+    width: 350px;        /* Width of the container */
+    height: 680px;       /* Height of the container */
+    margin: 40px auto;   /* Centering the container */
+    overflow: hidden;     /* Hides overflow */
+    font-family: 'Roboto', sans-serif; /* Font family */
+    color: #333;         /* Text color */
+    position: relative;   /* Positioning */
+    padding: 20px;       /* Padding for the container */
+    clip-path: polygon(  /* Zigzag shape */
+        5% 0%, 10% 5%, 15% 0%, 20% 5%, 
+        25% 0%, 30% 5%, 35% 0%, 40% 5%, 
+        45% 0%, 50% 5%, 55% 0%, 60% 5%, 
+        65% 0%, 70% 5%, 75% 0%, 80% 5%, 
+        85% 0%, 90% 5%, 95% 0%, 100% 5%, 
+        100% 95%, 95% 100%, 90% 95%, 
+        85% 100%, 80% 95%, 75% 100%, 
+        70% 95%, 65% 100%, 60% 95%, 
+        55% 100%, 50% 95%, 45% 100%, 
+        40% 95%, 35% 100%, 30% 95%, 
+        25% 100%, 20% 95%, 15% 100%, 
+        10% 95%, 5% 100%, 0% 95%, 
+        0% 5%
+    ); 
+}
+
+/* Inner ticket styling */
+.ticket {
+    background: #ffffff; /* Background color for the inner ticket */
+    width: 70px;; /* Reduce width to prevent overflow */
+    height: 500px; /* Reduce height to prevent overflow */
+    padding: 10px;       /* Padding for the inner ticket */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    border-radius: 15px; /* Rounded corners */
+    position: absolute;   /* Positioned absolutely within the container */
+    top: 20px;            /* Offset from the top */
+    left: 20px;           /* Offset from the left */
+}
+
+/* Header section with poster and movie details */
+.ticket-header {
+    display: flex;
+    align-items: center;
+    background: #ffffff; /* Simple white background */
+    padding: 20px;       /* Padding for the header */
+    margin-top: 20px; 
+    margin-bottom: 10px;   /* Increase margin from the top */
+    color: #333;         /* Text color for readability */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.poster {
+    width: 100px;        /* Width of the poster */
+    height: 150px;       /* Height of the poster */
+    object-fit: cover;   /* Cover the poster without distortion */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    margin-right: 20px;  /* Space between poster and details */
+}
+
+.details {
+    flex: 1;             /* Allow details to grow */
+}
+
+.details h2 {
+    font-size: 20px;     /* Font size for title */
+    margin: 0 0 10px;   /* Margin for title */
+    font-weight: bold;   /* Bold font weight for title */
+}
+
+.details p {
+    font-size: 14px;     /* Font size for details */
+    margin: 5px 0;       /* Margin for details */
+}
+
+/* QR code section */
+.qr-code-section {
+    text-align: center;  /* Center alignment */
+    padding: 20px;       /* Padding */
+    border-top: 1px solid #f1f1f1; /* Border for separation */
+    background-color: #fafafa; /* Light gray background */
+}
+
+.qr-code-section p {
+    margin-top: 10px;    /* Margin for the paragraph */
+    font-size: 14px;     /* Font size */
+    color: #777;         /* Text color */
+}
+
+/* Ticket information details */
+.ticket-info {
+    padding: 20px;       /* Padding */
+    background-color: #fafafa; /* Light gray background */
+}
+
+.ticket-info p {
+    margin: 10px 0;      /* Margin for paragraphs */
+    font-size: 14px;     /* Font size */
+    color: #444;         /* Text color */
+}
+
+.ticket-info p strong {
+    font-weight: bold;    /* Bold font weight */
+    color: #333;          /* Text color */
+}
+
+/* Action buttons for cancel booking and contact support */
+.ticket-actions {
+    display: flex;        /* Flex display */
+    justify-content: space-between; /* Space between buttons */
+    background-color: #ffffff; /* White background */
+    border-bottom-left-radius: 25px; /* Rounded corners */
+    border-bottom-right-radius: 25px; /* Rounded corners */
+    padding: 15px 20px;  /* Padding */
+}
+
+.cancel-button, 
+.support-button {
+    padding: 10px 25px;  /* Padding for buttons */
+    border: none;         /* No border */
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;      /* Pointer cursor */
+    font-size: 14px;     /* Font size */
+    font-weight: bold;    /* Bold font weight */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.cancel-button {
+    background-color: #ff1744; /* Red background */
+    color: #fff;                /* White text */
+}
+
+.support-button {
+    background-color: #00c853; /* Green background */
+    color: #fff;                /* White text */
+}
+
+.cancel-button:hover {
+    background-color: #d50000; /* Darker red on hover */
+}
+
+.support-button:hover {
+    background-color: #00bfa5; /* Darker green on hover */
+}
+.dashed-border {
+    border-top: 3px dashed #3e3939; /* Dashed border color and thickness */
+    margin: 10px 0;                 /* Margin above and below the border */
+}
