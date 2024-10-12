@@ -73,23 +73,37 @@ const RazorpayPayment = () => {
   };
 
   return (
-  <div className="rzp-container">
-    <h2 className="rzp-title">Pay with Razorpay</h2>
-    <h4 className="rzp-subtitle">Reservation Details:</h4>
-    <p className="rzp-paragraph">Check-in Date: {checkinDate}</p>
-    <p className="rzp-paragraph">Check-out Date: {checkoutDate}</p>
-    <p className="rzp-paragraph">Check-in Time: {checkinTime}</p>
-    <p className="rzp-paragraph">Check-out Time: {checkoutTime}</p>
-    <p className="rzp-paragraph">Vehicle Type: {vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)}</p>
-    
-    <h4 className="rzp-subtitle">Billing Details:</h4>
-    <p className="rzp-paragraph">Hourly Rate: ₹{hourlyRate.toFixed(2)}</p>
-    <p className="rzp-paragraph">Platform Fee (5%): ₹{(platformFee / 100).toFixed(2)}</p>
-    <p className="rzp-paragraph">Total Amount: ₹{(totalAmount / 100).toFixed(2)}</p>
-
-    <button className="rzp-button" onClick={handlePayment}>Pay Now</button>
-  </div>
-);
+    <div className="rzp-container">
+      <h2 className="rzp-title">Pay with Razorpay</h2>
+      <h4 className="rzp-subtitle">Reservation Details:</h4>
+      <p className="rzp-paragraph">Check-in Date: {checkinDate}</p>
+      <p className="rzp-paragraph">Check-out Date: {checkoutDate}</p>
+      <p className="rzp-paragraph">Check-in Time: {checkinTime}</p>
+      <p className="rzp-paragraph">Check-out Time: {checkoutTime}</p>
+      <p className="rzp-paragraph">Vehicle Type: {vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)}</p>
+      
+      <div className="billing-details">
+        <h4 className="rzp-bill-header">Billing Details:</h4>
+        <div className="rzp-bill">
+          <div className="rzp-bill-item">
+            <span>Hourly Rate:</span>
+            <span>₹{hourlyRate.toFixed(2)}</span>
+          </div>
+          <div className="rzp-bill-item">
+            <span>Platform Fee (5%):</span>
+            <span>₹{(platformFee / 100).toFixed(2)}</span>
+          </div>
+          <div className="rzp-bill-item">
+            <span>Total Amount:</span>
+            <span>₹{(totalAmount / 100).toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
+  
+      <button className="rzp-button" onClick={handlePayment}>Pay Now</button>
+    </div>
+  );
+  
 };
 
 export default RazorpayPayment;
