@@ -1,11 +1,13 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './RazorpayPayment.css';
 
 const razorpayApiKey = process.env.REACT_APP_RAZORPAY_API_KEY;
 
 const RazorpayPayment = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Add useNavigate for redirection
+  
   const { 
     checkinDate, 
     checkoutDate, 
@@ -55,8 +57,23 @@ const RazorpayPayment = () => {
       name: "UrbanDepot",
       description: "Parking Reservation Payment",
       handler: function (response) {
-        alert(`Payment ID: ${response.razorpay_payment_id}`);
-        // Additional logic to save payment details to your backend can go here
+        // On successful payment, navigate to the ticket page
+        navigate('/ticket', { 
+          state: {
+            paymentId: response.razorpay_payment_id,
+            reservationData: {
+              checkinDate,
+              checkoutDate,
+              checkinTime,
+              checkoutTime,
+              name,
+              email,
+              contactNumber,
+              vehicleType
+            },
+            totalAmount: (totalAmount / 100).toFixed(2) // Total amount in INR
+          }
+        });
       },
       prefill: {
         name: name, // Use name from reservation data
